@@ -38,7 +38,7 @@ float SonicI2C::getLiters() {
     float distance_mm = getDistance(); // Assuming getDistance returns distance in millimeters
 
     // Convert distance to volume in liters using the formula: pie * R^2 * L
-    float volume_liters = 3.141592653589793 * radius * radius * distance_mm / 1000000.0; // Convert from mm^3 to liters
+    float volume_liters = 3.141592653589793 * radius * radius * distance_mm / 1000.0; // Convert from mm^3 to liters
 
     return volume_liters;
 }
