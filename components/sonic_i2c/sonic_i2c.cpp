@@ -34,11 +34,11 @@ float SonicI2C::getDistance(){
 
 float SonicI2C::getLiters() {
     float radius = 500.0; // Replace with the actual radius value
-    float tank_height = 1100;
+    float tank_height = 1000;
     float distance_mm = getDistance(); // Assuming getDistance returns distance in millimeters
-
+    float fill_height = tank_height - distance_mm;
     // Convert distance to volume in liters using the formula: pie * R^2 * L
-    float volume_liters = 3.141592653589793 * radius * radius * distance_mm / 1000000.0; // Convert from mm^3 to liters
+    float volume_liters = 3.141592653589793 * radius * radius * fill_height / 1000000.0; // Convert from mm^3 to liters
 
     return volume_liters;
 }
