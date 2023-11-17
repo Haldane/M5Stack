@@ -32,24 +32,14 @@ float SonicI2C::getDistance(){
   return  0 ;
 }
 
-float SonicI2C::getLiters(){
-    uint32_t data;
-    uint8_t val = 0x01 ;
-    this->write( &val, 1);
-    
-    delay(120);
-    uint8_t data_buffer[]={0,0,0,0,0};
-    
-    this->read(data_buffer,3);
-    data = data_buffer[0]<< 16 | data_buffer[1]<< 8 | data_buffer[2];
-    float Liters = float(data) / 1000;
-    if (Liters > 4500.00) {
-        return 9999.00;
-    } else {
-        //return Liters;
-        return 444;
-    }
-  return  0 ;
+float SonicI2C::getLiters() {
+    float radius = 10.0; // Replace with the actual radius value
+    float distance_mm = getDistance(); // Assuming getDistance returns distance in millimeters
+
+    // Convert distance to volume in liters using the formula: pie * R^2 * L
+    float volume_liters = 3.141592653589793 * radius * radius * distance_mm / 1000000.0; // Convert from mm^3 to liters
+
+    return volume_liters;
 }
 
 void SonicI2C::setup(){
@@ -61,19 +51,21 @@ void SonicI2C::setup(){
 
 void SonicI2C::update() {
    
-    float result =  this->getDistance();
-    float resultLiters = this->getLiters();
+    float result = this->getLiters();   
+    //float result =  this->getDistance();
+    //float resultLiters = this->getLiters();
     if(result>=4500|| result<=20)
     {
-            ESP_LOGI(TAG, "Incorrect Distance Reading");
+            ESP_LOGI(TAG, "Incorrect Liters Reading");
          }else{
-            ESP_LOGD(TAG, "%s - Got distance: %.2f mm", this->name_.c_str(), result , resultLiters);
-            ESP_LOGD(TAG, "%s - Got distance: %.2f mm, %.2f liters", this->name_.c_str(), result, resultLiters);
+            ESP_LOGD(TAG, "%s - Got Liters: %.2f Lts", this->name_.c_str(), result);
+            //ESP_LOGD(TAG, "%s - Got distance: %.2f mm", this->name_.c_str(), result , resultLiters);
+            //ESP_LOGD(TAG, "%s - Got di %.2f mm, %.2f liters", this->name_.c_str(), result, resultLiters);
 
            
       }
     
-    publish_state(result,resultLiters);
+    publish_state(result);
   
 }
 
