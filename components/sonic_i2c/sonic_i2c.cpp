@@ -46,7 +46,8 @@ float SonicI2C::getLiters(){
     if (Liters > 4500.00) {
         return 9999.00;
     } else {
-        return Liters;
+        //return Liters;
+        return 444
     }
   return  0 ;
 }
@@ -67,10 +68,12 @@ void SonicI2C::update() {
             ESP_LOGI(TAG, "Incorrect Distance Reading");
          }else{
             ESP_LOGD(TAG, "%s - Got distance: %.2f mm", this->name_.c_str(), result , resultLiters);
+            ESP_LOGD(TAG, "%s - Got distance: %.2f mm, %.2f liters", this->name_.c_str(), result, resultLiters);
+
            
       }
     
-    publish_state(result);
+    publish_state(result,resultLiters);
   
 }
 
