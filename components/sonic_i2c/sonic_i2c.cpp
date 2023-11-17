@@ -33,12 +33,12 @@ float SonicI2C::getDistance(){
 }
 
 float SonicI2C::getLiters() {
-    float radius = 10.0; // Replace with the actual radius value
-    float tank_height = 110;
+    float radius = 500.0; // Replace with the actual radius value
+    float tank_height = 1100;
     float distance_mm = getDistance(); // Assuming getDistance returns distance in millimeters
 
     // Convert distance to volume in liters using the formula: pie * R^2 * L
-    float volume_liters = 3.141592653589793 * radius * radius * distance_mm / 1000.0; // Convert from mm^3 to liters
+    float volume_liters = 3.141592653589793 * radius * radius * distance_mm / 1000000.0; // Convert from mm^3 to liters
 
     return volume_liters;
 }
@@ -60,7 +60,7 @@ void SonicI2C::update() {
             ESP_LOGI(TAG, "Incorrect Liters Reading - Litres");
     //     }else{
             ESP_LOGD(TAG, "%s - Got Liters: %.2f Lts", this->name_.c_str(), result);
-            ESP_LOGD(TAG, "%s - Got Distance: %.2f Lts", this->name_.c_str(), result2);
+            ESP_LOGD(TAG, "%s - Got Distance: %.2f mm", this->name_.c_str(), result2);
             //ESP_LOGD(TAG, "%s - Got distance: %.2f mm", this->name_.c_str(), result , resultLiters);
             //ESP_LOGD(TAG, "%s - Got di %.2f mm, %.2f liters", this->name_.c_str(), result, resultLiters);
 
