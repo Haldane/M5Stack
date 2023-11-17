@@ -39,7 +39,7 @@ float SonicI2C::getLiters() {
     float fill_height = tank_height - distance_mm;
     // Convert distance to volume in liters using the formula: pie * R^2 * L
     float volume_liters = 3.141592653589793 * radius * radius * fill_height / 1000000.0; // Convert from mm^3 to liters
-    ESP_LOGD(TAG, "%s - Got Distance Height of Level Fill: %.2f Lts", this->name_.c_str(), fill_height);
+    ESP_LOGD(TAG, "%s - Got Distance Height of Level Fill: %.2f mm", this->name_.c_str(), fill_height);
     return volume_liters;
 }
 
