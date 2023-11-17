@@ -46,7 +46,7 @@ float SonicI2C::getLiters(){
     if (Liters > 4500.00) {
         return 9999.00;
     } else {
-        return Distance;
+        return Liters;
     }
   return  0 ;
 }
