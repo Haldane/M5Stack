@@ -24,10 +24,11 @@ float SonicI2C::getDistance(){
     this->read(data_buffer,3);
     data = data_buffer[0]<< 16 | data_buffer[1]<< 8 | data_buffer[2];
     float Distance = float(data) / 1000;
+    float Distance_less_fill = 1000 - Distance;
     if (Distance > 4500.00) {
         return 4500.00;
     } else {
-        return Distance;
+        return Distance_less_fill;
     }
   return  0 ;
 }
@@ -41,6 +42,7 @@ float SonicI2C::getLiters() {
     float volume_liters = 3.141592653589793 * radius * radius * fill_height / 1000000.0; // Convert from mm^3 to liters
     ESP_LOGD(TAG, "%s - Got Distance Height of Level Fill: %.2f mm", this->name_.c_str(), fill_height);
     return volume_liters;
+    
 }
 
 void SonicI2C::setup(){
@@ -61,8 +63,7 @@ void SonicI2C::update() {
          }else{
             ESP_LOGD(TAG, "%s - Got Liters: %.2f Lts", this->name_.c_str(), result);
             ESP_LOGD(TAG, "%s - Got Distance to Fill Level: %.2f mm", this->name_.c_str(), result2);
-            //ESP_LOGD(TAG, "%s - Got distance: %.2f mm", this->name_.c_str(), result , resultLiters);
-            //ESP_LOGD(TAG, "%s - Got di %.2f mm, %.2f liters", this->name_.c_str(), result, resultLiters);
+            
 
            
      }
