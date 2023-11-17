@@ -54,7 +54,7 @@ void SonicI2C::update() {
     float result = this->getLiters();   
     //float result =  this->getDistance();
     //float resultLiters = this->getLiters();
-    if(result>=4500|| result<=20)
+    if(result>=4500|| result<=0.001)
     {
             ESP_LOGI(TAG, "Incorrect Liters Reading");
          }else{
