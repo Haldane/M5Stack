@@ -67,7 +67,7 @@ void SonicI2C::update() {
            
       //}
     
-    publish_state(result);
+    publish_state(result2);
   
 }
 
