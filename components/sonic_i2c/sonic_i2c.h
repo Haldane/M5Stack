@@ -16,6 +16,7 @@ class SonicI2C: public i2c::I2CDevice, public sensor::Sensor, public PollingComp
      void dump_config() override;
      void update() override ;
      float getDistance();
+     float getLiters();
 
 };
 
